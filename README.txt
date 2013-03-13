@@ -1,1 +1,0 @@
-pyramid_i18n_howto README

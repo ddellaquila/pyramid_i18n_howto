@@ -22,6 +22,11 @@ Python and Pyramid installed, see `Installing Pyramid`_ for the details::
 
     (env)$ pcreate -t starter pyramid_i18n_howto
     (env)$ cd pyramid_i18n_howto/
+    (env)$ python setup.py develop
+    (env)$ python setup.py test -q
+    (env)$ pserve development.ini
+
+Browse to your project by visiting http://localhost:6543 in your browser.
 
 
 ----
