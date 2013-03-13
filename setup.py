@@ -10,6 +10,8 @@ requires = [
     'pyramid',
     'pyramid_debugtoolbar',
     'waitress',
+    'Babel',
+    'lingua',
     ]
 
 setup(name='pyramid_i18n_howto',
@@ -36,4 +38,8 @@ setup(name='pyramid_i18n_howto',
       [paste.app_factory]
       main = pyramid_i18n_howto:main
       """,
+      message_extractors={'.': [
+            ('**.py', 'lingua_python', None),
+            ('**.pt', 'lingua_xml', None),
+            ]},
       )

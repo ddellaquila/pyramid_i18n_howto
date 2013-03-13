@@ -29,6 +29,51 @@ Python and Pyramid installed, see `Installing Pyramid`_ for the details::
 Browse to your project by visiting http://localhost:6543 in your browser.
 
 
+2. Setup Internationalization and Localization
+==============================================
+
+To setup Internationalization and Localization [2]_ you need to install
+``Babel`` and ``lingua`` packages in your virtual environment::
+
+    (env)$ easy_install Babel lingua
+
+Then edit the ``setup.py`` file in order to generate ``gettext`` files
+from your application.
+
+In particular, add the Babel and lingua distributions to the ``requires``
+list and insert a set of references to Babel *message extractors*::
+
+    # ...
+    requires = [
+        # ...
+        'Babel',
+        'lingua',
+        ]
+
+    setup(name="mypackage",
+          # ...
+          message_extractors = { '.': [
+                ('**.py', 'lingua_python', None ),
+                ('**.pt', 'lingua_xml', None ),
+                ]},
+          )
+
+The ``message_extractors`` stanza placed into the ``setup.py`` file causes
+the Babel message catalog extraction machinery to also consider ``*.pt``
+files when doing message id extraction.
+
+If you use Mako templates you may also want to add the following in the
+``message_extractors`` [3]_::
+
+    # ...
+    message_extractors = { '.': [
+          # ...
+          ('templates/**.html', 'mako', None),
+          ('templates/**.mako', 'mako', None),
+          ('static/**', 'ignore', None)
+          ]},
+
+
 ----
 
 To read the original blog post of this tutorial visit
@@ -50,3 +95,5 @@ any later version.
 
 .. references:
 .. [1] http://docs.pylonsproject.org/projects/pyramid/en/latest/narr/project.html
+.. [2] http://docs.pylonsproject.org/projects/pyramid/en/latest/narr/i18n.html
+.. [3] http://docs.pylonsproject.org/projects/pyramid_cookbook/en/latest/templates/mako_i18n.html
