@@ -81,6 +81,19 @@ configuration, edit ``pyramid_i18n_howto/__init__.py`` file::
         config.add_translation_dirs('pyramid_i18n_howto:locale')
 
 
+3. Mark Messages for Translation
+================================
+
+Now it's time to mark some messages that need to be translated in our
+template, but first add a namespace and the *i18n:domain* to the
+``templates/mytemplate.pt`` template file::
+
+    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+          xmlns:tal="http://xml.zope.org/namespaces/tal"
+          xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+          i18n:domain="pyramid_i18n_howto">
+
+
 ----
 
 To read the original blog post of this tutorial visit
