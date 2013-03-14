@@ -112,6 +112,25 @@ Last command it creates the message catalog template named
 ``pyramid_i18n_howto/locale/pyramid_i18n_howto.pot``.
 
 
+5. Initializing the Message Catalog Files
+=========================================
+
+Then initialize the catalogs for each language that you want to use::
+
+    (env)$ python setup.py init_catalog -l en
+    (env)$ python setup.py init_catalog -l es
+    (env)$ python setup.py init_catalog -l it
+
+The message catalogs ``.po`` files will end up in::
+
+    pyramid_i18n_howto/locale/en/LC_MESSAGES/pyramid_i18n_howto.po
+    pyramid_i18n_howto/locale/es/LC_MESSAGES/pyramid_i18n_howto.po
+    pyramid_i18n_howto/locale/it/LC_MESSAGES/pyramid_i18n_howto.po
+
+Once the files are there, they can be worked on by a human translator.
+One tool that may help you with this is `Poedit`_.
+
+
 ----
 
 To read the original blog post of this tutorial visit
@@ -130,6 +149,8 @@ any later version.
 .. links:
 .. _`pyramid_i18n_howto`: https://github.com/ddellaquila/pyramid_i18n_howto
 .. _`Installing Pyramid`: http://docs.pylonsproject.org/projects/pyramid/en/latest/narr/install.html#installing-chapter
+.. _`Poedit`: http://www.poedit.net/
+
 
 .. references:
 .. [1] http://docs.pylonsproject.org/projects/pyramid/en/latest/narr/project.html
