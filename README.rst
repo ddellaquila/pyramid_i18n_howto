@@ -73,6 +73,13 @@ If you use Mako templates you may also want to add the following in the
           ('static/**', 'ignore', None)
           ]},
 
+Then you need to add your ``locale`` directory to your project’s
+configuration, edit ``pyramid_i18n_howto/__init__.py`` file::
+
+    def main(...):
+        # ...
+        config.add_translation_dirs('pyramid_i18n_howto:locale')
+
 
 ----
 
