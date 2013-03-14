@@ -99,6 +99,19 @@ the *Search documentation* string::
     <h2 i18n:translate="search_documentation">Search documentation</h2>
 
 
+4. Extracting Messages from a Template
+======================================
+
+We follow by extracting the messages from a template, run these commands
+in your project’s directory::
+
+    (env)$ mkdir pyramid_i18n_howto/locale
+    (env)$ python setup.py extract_messages
+
+Last command it creates the message catalog template named
+``pyramid_i18n_howto/locale/pyramid_i18n_howto.pot``.
+
+
 ----
 
 To read the original blog post of this tutorial visit
