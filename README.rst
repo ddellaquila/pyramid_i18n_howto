@@ -93,6 +93,11 @@ template, but first add a namespace and the *i18n:domain* to the
           xmlns:i18n="http://xml.zope.org/namespaces/i18n"
           i18n:domain="pyramid_i18n_howto">
 
+Then we mark some messages for translation, for simplicity we edit only
+the *Search documentation* string::
+
+    <h2 i18n:translate="search_documentation">Search documentation</h2>
+
 
 ----
 
