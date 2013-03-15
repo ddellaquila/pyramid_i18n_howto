@@ -148,6 +148,25 @@ Note
     I added them here just for completeness of this tutorial.
 
 
+7. Define the Default Local Name
+================================
+
+We are now able to see our web application translated, so define your
+default locale name in the ``development.ini`` file::
+
+    [app:main]
+    #...
+    pyramid.default_locale_name = it
+    #...
+
+Run the application using the ``pserve`` command::
+
+    (env)$ pserve development.ini
+
+Visit http://localhost:6543 in your browser, you should see your
+messages translated.
+
+
 ----
 
 To read the original blog post of this tutorial visit
