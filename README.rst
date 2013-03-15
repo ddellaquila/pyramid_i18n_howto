@@ -269,6 +269,59 @@ Add the following code to ``i18n.py`` module::
         event.request._LOCALE_ = accepted.best_match(('en', 'es', 'it'), 'it')
 
 
+11. Using a Custom Locale Negotiator
+====================================
+
+Most of the web applications can make use of the default locale
+negotiator [8]_, which requires no additional coding or configuration.
+
+Sometimes, the default locale negotiation scheme doesn't fit our web
+application needs and it's better to create a custom one.
+
+As an example we modify the original ``default_locale_negotiator()`` by
+implementing the check for the ``Accept-Language`` header.
+
+Add the ``custom_locale_negotiator()`` function to the ``i18n.py``
+module::
+
+    LOCALES = ('en', 'es', 'it')
+
+    def custom_locale_negotiator(request):
+        """ The :term:`custom locale negotiator`. Returns a locale name.
+
+        - First, the negotiator looks for the ``_LOCALE_`` attribute of
+          the request object (possibly set by a view or a listener for an
+          :term:`event`).
+
+        - Then it looks for the ``request.params['_LOCALE_']`` value.
+
+        - Then it looks for the ``request.cookies['_LOCALE_']`` value.
+
+        - Then it looks for the ``Accept-Language`` header value,
+          which is set by the user in his/her browser configuration.
+
+        - Finally, if the locale could not be determined via any of
+          the previous checks, the negotiator returns the
+          :term:`default locale name`.
+        """
+
+        name = '_LOCALE_'
+        locale_name = getattr(request, name, None)
+        if locale_name is None:
+            locale_name = request.params.get(name)
+            if locale_name is None:
+                locale_name = request.cookies.get(name)
+                if locale_name is None:
+                    locale_name = request.accept_language.best_match(
+                        LOCALES, request.registry.settings.default_locale_name)
+                    if not request.accept_language:
+                        # If browser has no language configuration
+                        # the default locale name is returned.
+                        locale_name = request.registry.settings.default_locale_name
+
+        return locale_name
+
+
 ----
 
 To read the original blog post of this tutorial visit
@@ -298,3 +351,4 @@ any later version.
 .. [5] http://docs.pylonsproject.org/projects/pyramid/en/latest/narr/hooks.html#adding-renderer-globals
 .. [6] http://docs.pylonsproject.org/projects/pyramid/en/latest/api/config.html?highlight=add_subscriber#pyramid.config.Configurator.add_subscriber
 .. [7] http://stackoverflow.com/questions/11274420/determine-the-user-language-in-pyramid
+.. [8] http://docs.pylonsproject.org/projects/pyramid/en/latest/narr/i18n.html#locale-negotiators
