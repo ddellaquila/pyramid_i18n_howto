@@ -20,7 +20,7 @@ msgstr ""
 
 #: pyramid_i18n_howto/views.py:7
 msgid "My i18n project"
-msgstr ""
+msgstr "Mi proyecto i18n"
 
 #. Default: Search documentation
 #: pyramid_i18n_howto/templates/mytemplate.pt:37

@@ -235,6 +235,8 @@ messages to the catalog template and update our catalog files::
     (env)$ python setup.py extract_messages
     (env)$ python setup.py update_catalog
 
+Once again a human translator have to translate the messages.
+
 
 ----
 
