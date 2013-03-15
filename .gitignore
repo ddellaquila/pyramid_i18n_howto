@@ -14,7 +14,7 @@ build
 dist
 #
 # Compiled translations files
-*.mo
+#*.mo
 #
 # Pyramid Project Files
 .coverage

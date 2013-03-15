@@ -131,6 +131,23 @@ Once the files are there, they can be worked on by a human translator.
 One tool that may help you with this is `Poedit`_.
 
 
+6. Compiling the Message Catalog Files
+======================================
+
+Pyramid itself ignores the existence of all ``.po`` files. For a running
+application to have translations available, you need to compile the
+catalogs to ``.mo`` files.
+
+Once your catalog files have been translated, run the following command::
+
+    (env)$ python setup.py compile_catalog
+
+Note
+    I usually include ``.mo`` files in the ``.gitignore`` to keep them
+    out of the version control system as they are just binaries.
+    I added them here just for completeness of this tutorial.
+
+
 ----
 
 To read the original blog post of this tutorial visit
