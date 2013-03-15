@@ -167,6 +167,43 @@ Visit http://localhost:6543 in your browser, you should see your
 messages translated.
 
 
+8. Translating Strings in the Python Code
+=========================================
+
+We learn how to translate strings in template files, but we also need
+to translate strings inside our Python code and for that we need to use
+a localizer [4]_, a ``TranslationStringFactory`` and to add a renderer
+globals [5]_ (which is currently deprecated as of Pyramid 1.1, so I will
+have to investigate more on this) .
+
+You can use the ``pyramid.i18n.get_localizer()`` function to obtain
+a localizer.
+
+Create the following ``pyramid_i18n_howto/i18n.py`` file::
+
+    from pyramid.i18n import get_localizer, TranslationStringFactory
+
+
+    def add_renderer_globals(event):
+        request = event.get('request')
+        if request is None:
+            request = get_current_request()
+        event['_'] = request.translate
+        event['localizer'] = request.localizer
+
+
+    tsf = TranslationStringFactory('pyramid_i18n_howto')
+
+
+    def add_localizer(event):
+        request = event.request
+        localizer = get_localizer(request)
+
+        def auto_translate(string):
+            return localizer.translate(tsf(string))
+        request.localizer = localizer
+        request.translate = auto_translate
+
 ----
 
 To read the original blog post of this tutorial visit
@@ -192,3 +229,5 @@ any later version.
 .. [1] http://docs.pylonsproject.org/projects/pyramid/en/latest/narr/project.html
 .. [2] http://docs.pylonsproject.org/projects/pyramid/en/latest/narr/i18n.html
 .. [3] http://docs.pylonsproject.org/projects/pyramid_cookbook/en/latest/templates/mako_i18n.html
+.. [4] http://docs.pylonsproject.org/projects/pyramid/en/latest/narr/i18n.html#using-a-localizer
+.. [5] http://docs.pylonsproject.org/projects/pyramid/en/latest/narr/hooks.html#adding-renderer-globals
