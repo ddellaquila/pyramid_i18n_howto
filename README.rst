@@ -212,6 +212,19 @@ following event subscribers [6]_::
     config.add_subscriber('pyramid_i18n_howto.i18n.add_localizer',
                           'pyramid.events.NewRequest')
 
+Now mark a string for translation in the ``view.py`` module, replace
+the following line::
+
+    return {'project': 'pyramid_i18n_howto'}
+
+with::
+
+    _ = request.translate
+    return {'project': _('My i18n project')}
+
+here we used the ``_()`` function, which is a convenient way of marking
+translations strings.
+
 
 ----
 
