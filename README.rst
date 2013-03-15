@@ -226,6 +226,16 @@ here we used the ``_()`` function, which is a convenient way of marking
 translations strings.
 
 
+9. Updating the catalog files
+=============================
+
+As we added another translation string, we need to extract again the
+messages to the catalog template and update our catalog files::
+
+    (env)$ python setup.py extract_messages
+    (env)$ python setup.py update_catalog
+
+
 ----
 
 To read the original blog post of this tutorial visit
