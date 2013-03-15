@@ -1,5 +1,17 @@
 from pyramid.i18n import get_localizer, TranslationStringFactory
 
+from pyramid.events import NewRequest
+from pyramid.events import subscriber
+from webob.acceptparse import Accept
+
+
+@subscriber(NewRequest)
+def setAcceptedLanguagesLocale(event):
+    if not event.request.accept_language:
+        return
+    accepted = event.request.accept_language
+    event.request._LOCALE_ = accepted.best_match(('en', 'es', 'it'), 'it')
+
 
 def add_renderer_globals(event):
     request = event.get('request')

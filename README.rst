@@ -246,6 +246,29 @@ messages translated into the language defined by
 ``pyramid.default_locale_name``.
 
 
+10. Determine the User Language
+===============================
+
+When developing a web application, you may want to determine the user
+language. Pyramid doesn't dictate how a locale should be negotiated,
+one way to do it is basing your site language on the ``Accept-Language``
+header [7]_.
+
+Add the following code to ``i18n.py`` module::
+
+    from pyramid.events import NewRequest
+    from pyramid.events import subscriber
+    from webob.acceptparse import Accept
+
+
+    @subscriber(NewRequest)
+    def setAcceptedLanguagesLocale(event):
+        if not event.request.accept_language:
+            return
+        accepted = event.request.accept_language
+        event.request._LOCALE_ = accepted.best_match(('en', 'es', 'it'), 'it')
+
+
 ----
 
 To read the original blog post of this tutorial visit
@@ -274,3 +297,4 @@ any later version.
 .. [4] http://docs.pylonsproject.org/projects/pyramid/en/latest/narr/i18n.html#using-a-localizer
 .. [5] http://docs.pylonsproject.org/projects/pyramid/en/latest/narr/hooks.html#adding-renderer-globals
 .. [6] http://docs.pylonsproject.org/projects/pyramid/en/latest/api/config.html?highlight=add_subscriber#pyramid.config.Configurator.add_subscriber
+.. [7] http://stackoverflow.com/questions/11274420/determine-the-user-language-in-pyramid
