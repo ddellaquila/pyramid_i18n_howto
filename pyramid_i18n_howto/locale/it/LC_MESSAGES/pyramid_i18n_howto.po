@@ -21,5 +21,5 @@ msgstr ""
 #. Default: Search documentation
 #: pyramid_i18n_howto/templates/mytemplate.pt:37
 msgid "search_documentation"
-msgstr ""
+msgstr "Cerca nella documentazione"
 
