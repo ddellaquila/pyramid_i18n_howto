@@ -235,7 +235,15 @@ messages to the catalog template and update our catalog files::
     (env)$ python setup.py extract_messages
     (env)$ python setup.py update_catalog
 
-Once again a human translator have to translate the messages.
+Once again a human translator have to translate the messages, and don't
+forget to recompile the catalogs files::
+
+    (env)$ python setup.py compile_catalog
+
+Test your application by running it with ``pserve`` command and visit
+http://localhost:6543 in your browser, you should be able to read your
+messages translated into the language defined by
+``pyramid.default_locale_name``.
 
 
 ----
