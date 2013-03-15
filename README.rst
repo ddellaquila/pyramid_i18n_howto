@@ -204,6 +204,15 @@ Create the following ``pyramid_i18n_howto/i18n.py`` file::
         request.localizer = localizer
         request.translate = auto_translate
 
+Then we change the application configuration by adding the
+following event subscribers [6]_::
+
+    config.add_subscriber('pyramid_i18n_howto.i18n.add_renderer_globals',
+                          'pyramid.events.BeforeRender')
+    config.add_subscriber('pyramid_i18n_howto.i18n.add_localizer',
+                          'pyramid.events.NewRequest')
+
+
 ----
 
 To read the original blog post of this tutorial visit
@@ -231,3 +240,4 @@ any later version.
 .. [3] http://docs.pylonsproject.org/projects/pyramid_cookbook/en/latest/templates/mako_i18n.html
 .. [4] http://docs.pylonsproject.org/projects/pyramid/en/latest/narr/i18n.html#using-a-localizer
 .. [5] http://docs.pylonsproject.org/projects/pyramid/en/latest/narr/hooks.html#adding-renderer-globals
+.. [6] http://docs.pylonsproject.org/projects/pyramid/en/latest/api/config.html?highlight=add_subscriber#pyramid.config.Configurator.add_subscriber
