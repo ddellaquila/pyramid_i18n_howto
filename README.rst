@@ -322,6 +322,36 @@ module::
         return locale_name
 
 
+12. Let Users Choose Their Language
+===================================
+
+As pointed out by Martijn Pieters is his Stackoverflow answer [7]_,
+basing your web application language on the ``Accept-Language`` header
+can cause problems to users that do not know how to set their preferred
+languages in the browser. Therefore, to make sure that users can switch
+languages easily, we use a cookie to store that preference for future
+visits [9]_.
+
+Add the ``set_locale_cookie()`` function to the ``i18n.py`` module::
+
+    from pyramid.view import view_config
+    from pyramid.response import Response
+    from pyramid.httpexceptions import HTTPFound
+    #...
+
+    #...
+    @view_config(route_name='locale')
+    def set_locale_cookie(request):
+        if request.GET['language']:
+            language = request.GET['language']
+            response = Response()
+            response.set_cookie('_LOCALE_',
+                                value=language,
+                                max_age=31536000)  # max_age = year
+        return HTTPFound(location=request.environ['HTTP_REFERER'],
+                         headers=response.headers)
+
+
 ----
 
 To read the original blog post of this tutorial visit
@@ -352,3 +382,4 @@ any later version.
 .. [6] http://docs.pylonsproject.org/projects/pyramid/en/latest/api/config.html?highlight=add_subscriber#pyramid.config.Configurator.add_subscriber
 .. [7] http://stackoverflow.com/questions/11274420/determine-the-user-language-in-pyramid
 .. [8] http://docs.pylonsproject.org/projects/pyramid/en/latest/narr/i18n.html#locale-negotiators
+.. [9] http://stackoverflow.com/questions/8746087/pyramid-how-to-set-cookie-without-renderer

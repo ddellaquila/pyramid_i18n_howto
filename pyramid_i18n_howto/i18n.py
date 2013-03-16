@@ -4,6 +4,10 @@ from pyramid.events import NewRequest
 from pyramid.events import subscriber
 from webob.acceptparse import Accept
 
+from pyramid.view import view_config
+from pyramid.response import Response
+from pyramid.httpexceptions import HTTPFound
+
 
 tsf = TranslationStringFactory('pyramid_i18n_howto')
 
@@ -62,3 +66,15 @@ def add_localizer(event):
         return localizer.translate(tsf(string))
     request.localizer = localizer
     request.translate = auto_translate
+
+
+@view_config(route_name='locale')
+def set_locale_cookie(request):
+    if request.GET['language']:
+        language = request.GET['language']
+        response = Response()
+        response.set_cookie('_LOCALE_',
+                            value=language,
+                            max_age=31536000)  # max_age = year
+    return HTTPFound(location=request.environ['HTTP_REFERER'],
+                     headers=response.headers)
