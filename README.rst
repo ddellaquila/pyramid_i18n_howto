@@ -351,6 +351,12 @@ Add the ``set_locale_cookie()`` function to the ``i18n.py`` module::
         return HTTPFound(location=request.environ['HTTP_REFERER'],
                          headers=response.headers)
 
+Add a new route in the configuration ``__init__py`` module::
+
+    #...
+    config.add_route('locale', '/locale')
+    #...
+
 
 ----
 
