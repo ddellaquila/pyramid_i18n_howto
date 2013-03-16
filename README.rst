@@ -357,6 +357,14 @@ Add a new route in the configuration ``__init__py`` module::
     config.add_route('locale', '/locale')
     #...
 
+Then add your languages links to the template file::
+
+    <p>
+        <a href="/locale?language=en">English</a>
+        <a href="/locale?language=es">Español</a>
+        <a href="/locale?language=it">Italiano</a>
+    </p>
+
 
 ----
 
