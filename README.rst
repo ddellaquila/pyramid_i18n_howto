@@ -366,6 +366,17 @@ Then add your languages links to the template file::
     </p>
 
 
+Conclusion
+----------
+
+That's conclude this tutorial for now, we learned how to setup i18n,
+translate strings in our code and templates, determine the user
+language and let them choose their preferred one, sure there are more
+things to know about it, so I invite you to fork my `pyramid_i18n_howto`_
+repository and send me your pull request to update it with new finding.
+
+    Danilo
+
 ----
 
 To read the original blog post of this tutorial visit
@@ -385,7 +396,6 @@ any later version.
 .. _`pyramid_i18n_howto`: https://github.com/ddellaquila/pyramid_i18n_howto
 .. _`Installing Pyramid`: http://docs.pylonsproject.org/projects/pyramid/en/latest/narr/install.html#installing-chapter
 .. _`Poedit`: http://www.poedit.net/
-
 
 .. references:
 .. [1] http://docs.pylonsproject.org/projects/pyramid/en/latest/narr/project.html
